@@ -2,5 +2,10 @@
   "$schema": "https://json.schemastore.org/tauri2",
   "productName": "MLS",
   "version": "0.1.0",
-  "identifier": "com.mls.app"
+  "identifier": "com.mls.app",
+  "build": {
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  }
 }
