@@ -1,0 +1,38 @@
+[package]
+name = "mls-cli"
+version = "0.1.0"
+edition = "2021"
+description = "CLI interface for MLS"
+
+[[bin]]
+name = "mls"
+path = "src/main.rs"
+
+[dependencies]
+clap = { workspace = true, features = ["derive"] }
+ratatui = { workspace = true }
+rpassword = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+mls-core = { path = "../mls-core" }
+mls-crypto = { path = "../mls-crypto" }
+mls-storage = { path = "../mls-storage" }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+rusqlite = { workspace = true }
+rand = { workspace = true }
+hex = "0.4"
+uuid = { workspace = true }
+dirs = "5"
+zeroize = { workspace = true }
+tokio = { version = "1", features = ["rt-multi-thread", "fs", "macros"] }
+dialoguer = "0.11"
+chrono = { workspace = true }
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

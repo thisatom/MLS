@@ -1,0 +1,26 @@
+[package]
+name = "mls-storage"
+version = "0.1.0"
+edition = "2021"
+description = "SQLite-based encrypted storage for MLS"
+
+[dependencies]
+rusqlite = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+mls-crypto = { path = "../mls-crypto" }
+tracing = { workspace = true }
+secrecy = { workspace = true }
+zeroize = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

@@ -1,0 +1,42 @@
+# Rust
+/target
+**/target
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+
+# Build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+
+# Tauri
+crates/mls-tauri/web/dist
+crates/mls-tauri/web/node_modules
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Test outputs
+**/test-outputs/

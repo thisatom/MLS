@@ -1,0 +1,25 @@
+[package]
+name = "mls-sync"
+version = "0.1.0"
+edition = "2021"
+description = "CRDT-based synchronization for MLS"
+
+[dependencies]
+yrs = { workspace = true }
+tokio = { workspace = true }
+tokio-tungstenite = { workspace = true }
+mdns-sd = { workspace = true }
+bincode = { workspace = true }
+postcard = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+mls-core = { path = "../mls-core" }
+mls-crypto = { path = "../mls-crypto" }
+tracing = { workspace = true }
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

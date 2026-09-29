@@ -1,0 +1,25 @@
+[package]
+name = "mls-tauri"
+version = "0.1.0"
+edition = "2021"
+description = "Tauri frontend for MLS"
+
+[dependencies]
+tauri = { workspace = true }
+serde = { workspace = true }
+anyhow = { workspace = true }
+mls-core = { path = "../mls-core" }
+mls-crypto = { path = "../mls-crypto" }
+mls-storage = { path = "../mls-storage" }
+mls-sync = { path = "../mls-sync" }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[build-dependencies]
+tauri-build = { workspace = true }
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

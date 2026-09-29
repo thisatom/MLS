@@ -1,0 +1,23 @@
+[package]
+name = "mls-core"
+version = "0.1.0"
+edition = "2021"
+description = "Core data models, CRDT, and crypto abstractions for MLS"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+uuid = { workspace = true }
+tracing = { workspace = true }
+chrono = { workspace = true }
+yrs = { workspace = true }
+
+[dev-dependencies]
+proptest = "1.0"
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

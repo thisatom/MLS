@@ -1,0 +1,26 @@
+[package]
+name = "mls-server"
+version = "0.1.0"
+edition = "2021"
+description = "Relay server for MLS"
+
+[[bin]]
+name = "mls-server"
+path = "src/main.rs"
+
+[dependencies]
+axum = { workspace = true }
+tokio = { workspace = true }
+rusqlite = { workspace = true }
+uuid = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+mls-crypto = { path = "../mls-crypto" }
+mls-storage = { path = "../mls-storage" }
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"

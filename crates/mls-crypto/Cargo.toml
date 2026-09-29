@@ -1,0 +1,30 @@
+[package]
+name = "mls-crypto"
+version = "0.1.0"
+edition = "2021"
+description = "Zero-knowledge encryption backend for MLS"
+
+[dependencies]
+argon2 = { workspace = true }
+hkdf = { workspace = true }
+aes-gcm = { workspace = true }
+sha2 = { workspace = true }
+zeroize = { workspace = true }
+secrecy = { workspace = true }
+rand = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+generic-array = "0.14"
+
+[features]
+default = []
+fast-tests = []
+
+[dev-dependencies]
+proptest = "1"
+
+[lints.clippy]
+all = "deny"
+unnecessary_wraps = "deny"
+missing_errors_doc = "deny"
+missing_panics_doc = "deny"
