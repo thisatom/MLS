@@ -37,11 +37,11 @@ pub struct Cli {
     pub data_dir: Option<PathBuf>,
 
     #[command(subcommand)]
-    pub command: Commands,
+    pub command: Option<Commands>,
 }
 
 /// Available commands
-#[derive(Debug, Subcommand, PartialEq)]
+#[derive(Debug, Subcommand, PartialEq, Eq)]
 pub enum Commands {
     /// Initialize a new vault
     #[command(alias = "i")]
@@ -80,12 +80,11 @@ pub enum Commands {
     Status(StatusCommand),
 
     /// Interactive mode
-    #[command(alias = "interactive")]
     Interactive,
 }
 
 /// Initialize a new vault
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct InitCommand {
     /// Name of the vault
     #[arg(short, long)]
@@ -97,7 +96,7 @@ pub struct InitCommand {
 }
 
 /// Unlock a vault
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct UnlockCommand {
     /// Vault ID to unlock (default: first vault)
     #[arg(long)]
@@ -105,11 +104,11 @@ pub struct UnlockCommand {
 }
 
 /// Lock the current session
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct LockCommand {}
 
 /// Add a new item
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct AddCommand {
     /// Type of item: password, note, generic
     #[arg(short, long, value_parser = clap::value_parser!(ItemType))]
@@ -128,7 +127,7 @@ pub struct AddCommand {
     pub username: Option<String>,
 
     /// URL (for password type)
-    #[arg(short, long, required = false)]
+    #[arg(long, required = false)]
     pub url: Option<String>,
 
     /// Content (for note type, or password value for password type)
@@ -141,7 +140,7 @@ pub struct AddCommand {
 }
 
 /// Get an item
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct GetCommand {
     /// Name or ID of the item
     #[arg(value_name = "NAME_OR_ID")]
@@ -157,7 +156,7 @@ pub struct GetCommand {
 }
 
 /// List items
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct ListCommand {
     /// Filter by type
     #[arg(short, long, value_parser = clap::value_parser!(ItemType))]
@@ -169,7 +168,7 @@ pub struct ListCommand {
 
     /// Show details
     #[arg(long)]
-    pub details: bool,
+    pub show_details: bool,
 
     /// Limit number of results
     #[arg(short, long)]
@@ -177,7 +176,7 @@ pub struct ListCommand {
 }
 
 /// Remove an item
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct RemoveCommand {
     /// Name or ID of the item
     #[arg(value_name = "NAME_OR_ID")]
@@ -189,11 +188,11 @@ pub struct RemoveCommand {
 }
 
 /// Change master password
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct ChangePasswordCommand {}
 
 /// Show session status
-#[derive(Debug, Parser, PartialEq)]
+#[derive(Debug, Parser, PartialEq, Eq)]
 pub struct StatusCommand {}
 
 fn main() -> Result<()> {
@@ -211,13 +210,13 @@ fn main() -> Result<()> {
     // Create session manager
     let session_manager = Arc::new(SessionManager::new(config.clone()));
 
-    // If no command specified or --interactive flag, run interactive mode
-    if cli.command == Commands::Interactive || std::env::args().len() == 1 {
+    // If no command specified or Interactive command, run interactive mode
+    if cli.command.is_none() || cli.command == Some(Commands::Interactive) {
         return Ok(interactive::run_interactive(config)?);
     }
 
     // Execute command
-    match cli.command {
+    match cli.command.unwrap() {
         Commands::Init(cmd) => {
             let result = InitCommand::run(cmd, &config, &session_manager);
             if let Err(e) = result {

@@ -1,8 +1,9 @@
 //! Error types for MLS CLI
 
-use dialoguer;
 use mls_storage::error::StorageError;
 use thiserror::Error;
+
+use dialoguer::Error as DialoguerError;
 
 /// CLI error type
 #[derive(Debug, Error)]
@@ -57,5 +58,5 @@ pub enum CliError {
 
     /// Dialoguer error
     #[error("Input error: {0}")]
-    DialoguerError(#[from] dialoguer::Error),
+    DialoguerError(#[from] DialoguerError),
 }

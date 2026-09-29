@@ -6,8 +6,11 @@ description = "Tauri frontend for MLS"
 
 [dependencies]
 tauri = { workspace = true }
-serde = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
 anyhow = { workspace = true }
+uuid = { workspace = true, features = ["v4", "serde"] }
+chrono = { workspace = true }
 mls-core = { path = "../mls-core" }
 mls-crypto = { path = "../mls-crypto" }
 mls-storage = { path = "../mls-storage" }

@@ -76,7 +76,7 @@ pub fn run_interactive(config: Config) -> Result<(), CliError> {
                 cmd_remove(&session_manager)?;
             }
             idx if options[idx] == "Lock vault" => {
-                cmd_lock(&session_manager)?;
+                cmd_lock(&session_manager);
             }
             _ => unreachable!(),
         }
@@ -147,11 +147,10 @@ fn cmd_unlock(session_manager: &SessionManager) -> Result<(), CliError> {
     Ok(())
 }
 
-fn cmd_lock(session_manager: &SessionManager) -> Result<(), CliError> {
+fn cmd_lock(session_manager: &SessionManager) {
     println!("\nLocking session...");
     session_manager.lock_all();
     println!("Session locked successfully.");
-    Ok(())
 }
 
 fn cmd_list(session_manager: &SessionManager) -> Result<(), CliError> {
@@ -196,7 +195,7 @@ fn cmd_add(session_manager: &SessionManager) -> Result<(), CliError> {
     
     let item_type = Select::with_theme(&dialoguer::theme::ColorfulTheme::default())
         .with_prompt("Item type:")
-        .items(&vec!["Password", "Note", "Generic"])
+        .items(&["Password", "Note", "Generic"])
         .interact()?;
     
     let item_type = match item_type {

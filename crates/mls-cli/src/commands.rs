@@ -184,7 +184,7 @@ impl ListCommand {
                 mls_core::models::ItemData::Generic(_) => "generic",
             };
 
-            if cmd.details {
+            if cmd.show_details {
                 println!("  {} [{}] - {}", item.metadata.name, item_type, item.id);
             } else {
                 println!("  {} [{}]", item.metadata.name, item_type);
